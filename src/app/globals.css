@@ -29,8 +29,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-  .border-glow {
-    border: 1px solid oklch(0.75 0.18 55 / 0.6);
-    box-shadow: 0 0 6px oklch(0.75 0.18 55 / 0.3), inset 0 0 6px oklch(0.75 0.18 55 / 0.05);
-  }
 }

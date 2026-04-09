@@ -13,7 +13,7 @@ export function NavBar() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 border-glow bg-background/80 backdrop-blur-xl z-50">
+    <nav className="fixed bottom-0 left-0 right-0 border-t border-border bg-background/80 backdrop-blur-xl z-50">
       <div className="mx-auto max-w-lg flex">
         {navItems.map((item) => {
           const isActive =

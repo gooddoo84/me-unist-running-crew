@@ -32,7 +32,7 @@ export function MonthNav({ year, month }: MonthNavProps) {
     <div className="flex items-center justify-between gap-4">
       <button
         onClick={goPrev}
-        className="rounded-lg px-3 py-2 border-glow text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+        className="rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
         aria-label="이전 달"
       >
         ←
@@ -42,7 +42,7 @@ export function MonthNav({ year, month }: MonthNavProps) {
       </h2>
       <button
         onClick={goNext}
-        className="rounded-lg px-3 py-2 border-glow text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+        className="rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
         aria-label="다음 달"
       >
         →
