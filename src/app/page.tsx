@@ -27,13 +27,13 @@ async function Dashboard({
     <>
       {/* Crew Stats Cards */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="rounded-xl bg-card border border-border p-3 text-center">
+        <div className="rounded-xl bg-card border-glow p-3 text-center">
           <p className="text-2xl font-bold text-accent tabular-nums">
             {stats.totalDistance.toFixed(1)}
           </p>
           <p className="text-xs text-muted-foreground mt-1">총 거리(km)</p>
         </div>
-        <div className="rounded-xl bg-card border border-border p-3 text-center">
+        <div className="rounded-xl bg-card border-glow p-3 text-center">
           <p className="text-2xl font-bold tabular-nums">
             {stats.activeMembers}
             <span className="text-sm text-muted-foreground font-normal">
@@ -42,7 +42,7 @@ async function Dashboard({
           </p>
           <p className="text-xs text-muted-foreground mt-1">활동 멤버</p>
         </div>
-        <div className="rounded-xl bg-card border border-border p-3 text-center">
+        <div className="rounded-xl bg-card border-glow p-3 text-center">
           <p className="text-2xl font-bold text-accent tabular-nums">
             {stats.goalAchievers}
           </p>
@@ -72,7 +72,7 @@ async function Dashboard({
                 <Link
                   key={member.memberId}
                   href={`/members/${member.memberId}`}
-                  className="flex items-center gap-3 rounded-xl bg-card border border-border p-4 hover:border-accent/50 transition-all group"
+                  className="flex items-center gap-3 rounded-xl bg-card border-glow p-4 hover:border-accent/50 transition-all group"
                 >
                   {/* Rank */}
                   <div className={`text-xl font-bold w-8 text-center ${color}`}>
