@@ -180,6 +180,63 @@ export async function getMemberDetail(memberId: string, year: number, month: num
   };
 }
 
+export async function getMemberTrend(memberId: string, year: number, month: number) {
+  // Daily distances for current month
+  const startDate = `${year}-${String(month).padStart(2, "0")}-01`;
+  const endDate =
+    month === 12
+      ? `${year + 1}-01-01`
+      : `${year}-${String(month + 1).padStart(2, "0")}-01`;
+
+  const dailyRows = await db
+    .select({
+      runDate: runningLogs.runDate,
+      total: sql<string>`SUM(${runningLogs.distance})`,
+    })
+    .from(runningLogs)
+    .where(
+      and(
+        eq(runningLogs.memberId, memberId),
+        sql`${runningLogs.runDate} >= ${startDate}`,
+        sql`${runningLogs.runDate} < ${endDate}`
+      )
+    )
+    .groupBy(runningLogs.runDate)
+    .orderBy(runningLogs.runDate);
+
+  // Monthly totals for last 6 months
+  const months: { year: number; month: number; total: number }[] = [];
+  for (let i = 5; i >= 0; i--) {
+    let m = month - i;
+    let y = year;
+    while (m <= 0) { m += 12; y--; }
+    const mStart = `${y}-${String(m).padStart(2, "0")}-01`;
+    const mEnd = m === 12
+      ? `${y + 1}-01-01`
+      : `${y}-${String(m + 1).padStart(2, "0")}-01`;
+
+    const [row] = await db
+      .select({ total: sql<string>`COALESCE(SUM(${runningLogs.distance}), 0)` })
+      .from(runningLogs)
+      .where(
+        and(
+          eq(runningLogs.memberId, memberId),
+          sql`${runningLogs.runDate} >= ${mStart}`,
+          sql`${runningLogs.runDate} < ${mEnd}`
+        )
+      );
+    months.push({ year: y, month: m, total: parseFloat(row.total) || 0 });
+  }
+
+  return {
+    daily: dailyRows.map((r) => ({
+      date: r.runDate,
+      distance: parseFloat(r.total) || 0,
+    })),
+    monthly: months,
+  };
+}
+
 export async function deleteRunningLog(logId: string, memberId: string) {
   await db.delete(runningLogs).where(eq(runningLogs.id, logId));
   revalidatePath("/");

@@ -1,10 +1,11 @@
 import { Suspense } from "react";
-import { getMemberDetail, setMonthlyGoal, deleteRunningLog } from "@/actions";
+import { getMemberDetail, getMemberTrend, setMonthlyGoal, deleteRunningLog } from "@/actions";
 import { notFound } from "next/navigation";
 import { ProgressRing } from "@/components/progress-ring";
 import { MonthNav } from "@/components/month-nav";
 import { GoalForm } from "./goal-form";
 import { LogList } from "./log-list";
+import { DistanceChart } from "@/components/distance-chart";
 import Link from "next/link";
 
 async function MemberContent({
@@ -16,7 +17,10 @@ async function MemberContent({
   year: number;
   month: number;
 }) {
-  const detail = await getMemberDetail(memberId, year, month);
+  const [detail, trend] = await Promise.all([
+    getMemberDetail(memberId, year, month),
+    getMemberTrend(memberId, year, month),
+  ]);
   if (!detail) notFound();
 
   const { member, logs, totalDistance, goalDistance } = detail;
@@ -59,6 +63,9 @@ async function MemberContent({
           </div>
         </div>
       </div>
+
+      {/* Distance Charts */}
+      <DistanceChart daily={trend.daily} monthly={trend.monthly} />
 
       {/* Goal Setting */}
       <div className="rounded-2xl bg-card border border-border p-4">
