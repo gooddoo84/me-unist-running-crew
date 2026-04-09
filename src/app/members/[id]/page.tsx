@@ -70,7 +70,7 @@ async function MemberContent({
       {/* Goal Setting */}
       <div className="rounded-2xl bg-card border border-border p-4">
         <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-          🎯 월별 목표 설정
+          🎯 이번 달 목표 설정
         </h3>
         <GoalForm
           memberId={memberId}
