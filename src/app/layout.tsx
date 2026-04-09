@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ME UNIST Running Crew",
-  description: "ME UNIST 러닝 크루 - 함께 달리고, 함께 성장하자!",
+  description: "ME UNIST 러닝 크루 - 나를 이겨라 챌린지",
 };
 
 export default function RootLayout({

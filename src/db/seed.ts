@@ -8,14 +8,15 @@ async function seed() {
   const db = drizzle(sql);
 
   const crewMembers = [
-    { name: "정다운", emoji: "🔥" },
-    { name: "김민수", emoji: "⚡" },
-    { name: "이서연", emoji: "🌟" },
-    { name: "박지훈", emoji: "🚀" },
-    { name: "최유진", emoji: "💪" },
-    { name: "한도윤", emoji: "🏃" },
+    { name: "김태성", emoji: "🔥" },
+    { name: "박영빈", emoji: "⚡" },
+    { name: "지우석", emoji: "🌟" },
+    { name: "이강수", emoji: "🚀" },
+    { name: "정임두", emoji: "💪" },
   ];
 
+  console.log("Clearing old members...");
+  await db.delete(members);
   console.log("Seeding members...");
   await db.insert(members).values(crewMembers);
   console.log("Done! Seeded", crewMembers.length, "members.");

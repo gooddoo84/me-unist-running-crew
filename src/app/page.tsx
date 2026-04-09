@@ -146,7 +146,7 @@ export default async function HomePage(props: {
           <span className="text-accent">ME UNIST</span> Running Crew
         </h1>
         <p className="text-sm text-muted-foreground mt-1">
-          함께 달리고, 함께 성장하자! 🏃‍♂️
+          나를 이겨라 챌린지 🏃‍♂️
         </p>
       </div>
 
